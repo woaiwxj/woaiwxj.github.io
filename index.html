@@ -24,3 +24,44 @@
 	</script>
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>相爱天数计算器</title>
+</head>
+<body>
+    <h1>相爱天数计算器</h1>
+
+    <form>
+        <label for="start-date">恋爱开始日期：</label>
+        <input type="date" id="start-date">
+
+        <label for="end-date">计算截止日期：</label>
+        <input type="date" id="end-date">
+    </form>
+
+    <button onclick="calculate()">计算相爱天数</button>
+
+    <div id="result"></div>
+
+    <script>
+        function calculate() {
+            const startDate = new Date(document.getElementById("start-date").value);
+            const endDate = new Date(document.getElementById("end-date").value);
+
+            if (!startDate || !endDate) {
+                return;
+            }
+
+            const timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+            const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
+            const diffHours = Math.floor((timeDiff % (1000 * 3600 * 24)) / (1000 * 3600));
+            const diffMinutes = Math.floor((timeDiff % (1000 * 3600)) / (1000 * 60));
+            const diffSeconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `我们相爱了 ${diffDays} 天 ${diffHours} 小时 ${diffMinutes} 分钟 ${diffSeconds} 秒`;
+        }
+    </script>
+</body>
+</html>
